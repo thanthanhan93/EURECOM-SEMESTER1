@@ -1,0 +1,26 @@
+output=$(cat 10.0.3.2.log)
+unset 'ar[@]::2'
+ar=($output)
+len_p=0
+len_c=${#ar[@]}
+
+while [ "$len_p" -ne "$len_c" ]
+do 
+	for ip in ${ar[@]}
+	do
+		file=$(echo "$ip.log")
+		while read line           
+		do
+			flag=0         
+			if [ $flag -eq 0 ]
+			then 
+				ar[${#ar[@]}]=$line 
+			fi   
+		done < $file
+	done
+	len_p=$len_c
+	len_c=${#ar[@]}
+done
+
+printf '%s\n' "${ar[@]}"
+

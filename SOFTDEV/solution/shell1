@@ -1,0 +1,1 @@
+find $DIR_PATH -exec ldd {} \; | grep \=\> | sed -r s-^[\\t]--g | grep -o  ^[^\ ]* | sort | uniq -c | sort -r -n
